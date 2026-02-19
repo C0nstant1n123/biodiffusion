@@ -25,7 +25,7 @@ def test_diffusion_conservation():
     """Vérifie que la diffusion conserve le nombre total de molécules (système fermé)."""
     grid = BioGrid(width=10, height=10, molecule_names=["AHL"])
     grid.set_diffusion_coefficient("AHL", 0.1)
-    grid.add_molecule(5, 5, "AHL", 1000) # On met 1000 molécules au centre
+    grid.add_molecule(5, 5, "AHL", 1000) 
     
     initial_sum = np.sum(grid.grid)
     grid.diffuse(tau_diff=0.1)
@@ -36,15 +36,12 @@ def test_diffusion_conservation():
 def test_diffusion_movement():
     """Vérifie que les molécules bougent effectivement après diffusion."""
     grid = BioGrid(width=10, height=10, molecule_names=["AHL"])
-    grid.set_diffusion_coefficient("AHL", 1.0) # Forte diffusion
+    grid.set_diffusion_coefficient("AHL", 1.0) 
     grid.add_molecule(5, 5, "AHL", 500)
     
-    # Avant diffusion, le centre a 500, les autres 0
     assert grid.get_concentration(5, 5, "AHL") == 500
     
     grid.diffuse(tau_diff=1.0)
     
-    # Après diffusion, la case centrale devrait avoir perdu des molécules
     assert grid.get_concentration(5, 5, "AHL") < 500
-    # Et la somme totale doit toujours être 500
     assert np.sum(grid.grid) == 500

@@ -68,10 +68,8 @@ class BioGrid:
         Args:
             tau_diff (float): Pas de temps de la simulation (secondes).
         """
-        # Sécurité : on s'assure qu'il n'y a pas de valeurs négatives
         self.grid[self.grid < 0] = 0
         
-        # Copie pour calculer les flux sans modifier la grille en cours de lecture
         current_grid = self.grid.copy()
         next_grid = self.grid.copy()
 
@@ -81,18 +79,14 @@ class BioGrid:
             if D <= 0:
                 continue
 
-            # Correction mathématique : parenthèses ajoutées au dénominateur
-            # Probabilité de bouger dans UNE direction spécifique (1/4 du total)
             prob_move = (D * tau_diff) / (4 * (self.dx ** 2))
 
-            # Limite de stabilité pour la simulation
-            if prob_move > 0.25:
+            if prob_move > 0.25:   # Limite de stabilité pour la diffusion sur une grille 2D
                 prob_move = 0.25
 
             species_current = current_grid[:, :, idx]
 
             # --- FLUX DROITE (Right) ---
-            # On prend tout sauf la dernière colonne, et on regarde ceux qui vont à droite
             movers = np.random.binomial(species_current[:, :-1], prob_move)
             next_grid[:, :-1, idx] -= movers 
             next_grid[:, 1:, idx]  += movers 
