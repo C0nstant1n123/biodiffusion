@@ -43,7 +43,7 @@ cd biodiffusion
 
 # 2. Create a virtual environment and install dependencies
 uv venv
-source .venv/bin/activate  # On Windows use: .venv\Scripts\activate
+source .venv/bin/activate  
 uv pip install -e .
 ```
 
