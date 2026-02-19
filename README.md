@@ -39,7 +39,7 @@ This project is packaged using modern Python standards (`pyproject.toml`).
 ```bash
 # 1. Clone the repository
 git clone https://github.com/C0nstant1n123/biodiffusion
-cd Retake_Numerical_Project
+cd biodiffusion
 
 # 2. Create a virtual environment and install dependencies
 uv venv
