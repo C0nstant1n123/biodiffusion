@@ -1,6 +1,6 @@
 import pytest
 import numpy as np
-from biodiffusion import BioGrid
+from biodiffusion_pkg import BioGrid
 
 # --- Tests pour add_molecule ---
 
